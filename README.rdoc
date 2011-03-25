@@ -6,7 +6,7 @@ With this tool, you can do a git commit with a redmine issue id. The message of 
 
 == Install
 
-sudo gem install git-redmine-commit
+gem install git-redmine-commit
 
 == Usage
 
