@@ -44,7 +44,7 @@ class GitRedmineCommit
 
       opts.separator ""
       opts.separator "Example:"
-      opts.separator "\t#{File.basename($0)} 3125 -a"
+      opts.separator "\t#{File.basename($0)} 3125 -- -a"
     end
     
     opts.parse!(args)
