@@ -6,11 +6,11 @@ With this tool, you can do a git commit with a redmine issue id. The message of 
 
 == Install
 
-gem install git-redmine-commit
+    gem install git-redmine-commit
 
 == Usage
 
-git-redmine-commit issue_id [options] -- [git-commit options]
+    git-redmine-commit issue_id [options] -- [git-commit options]
 
 Specify the api key and url. You only need to do it once for each repo.
         --redmine-api-key [key]      The api access key to access redmine.
