@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Robin Lu"]
-  s.date = %q{2011-03-27}
+  s.date = %q{2011-03-28}
   s.default_executable = %q{git-redmine-commit}
   s.description = %q{With this tool, you can do a git commit with a redmine issue id. The message of the commit is filled with the title of the issue automatically.}
   s.email = %q{iamawalrus@gmail.com}
@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "bin/git-redmine-commit",
+    "git-redmine-commit.gemspec",
     "lib/git-redmine-commit.rb",
     "test/helper.rb",
     "test/test_git-redmine-commit.rb"
