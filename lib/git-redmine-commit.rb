@@ -107,7 +107,7 @@ class GitRedmineCommit
     redmine_url = @options[:url]
     until redmine_url && !redmine_url.empty?
       print "Redmine url: "
-      redmine_url = gets.chomp
+      redmine_url = STDIN.gets.chomp
     end
     
     GRC_CONFIG[redmine_url] ||= {}
@@ -115,7 +115,7 @@ class GitRedmineCommit
     api_key = @options[:key] || GRC_CONFIG[redmine_url][:key]
     until api_key && !api_key.empty?
       print "Redmine api key: "
-      api_key = gets.chomp
+      api_key =  STDIN.gets.chomp
     end
     {:url => redmine_url, :key => api_key}
   end
