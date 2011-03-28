@@ -66,7 +66,8 @@ class GitRedmineCommit
     GRC_CONFIG[redmine_url][:key] = api_key
     GRC_CONFIG[redmine_url][:repos] ||= []
     GRC_CONFIG[redmine_url][:repos] << repo
-
+    GRC_CONFIG[redmine_url][:repos].uniq!
+    
     File.open( REDMINECOMMIT_RC, 'w' ) do |out|
         YAML.dump( GRC_CONFIG, out )
     end    
