@@ -83,7 +83,7 @@ class GitRedmineCommit
     set_redmine_config(@options[:url], @options[:key], @options[:repo])
     
     url = File.join(@options[:url], "issues", "#{@options[:issue_id]}.xml?key=#{@options[:key]}")
-    issue = open(url) { |f| XmlSimple.xml_in(f)}
+    issue = XmlSimple.xml_in(open(url).read)
     title = "fix issue ##{issue['id']} : #{issue['subject']}" 
     temp = Tempfile.new('redmine_commit')
     temp << title
