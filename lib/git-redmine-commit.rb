@@ -88,8 +88,7 @@ class GitRedmineCommit
     temp = Tempfile.new('redmine_commit')
     temp << title
     temp.close
-    # puts `git commit #{@options[:git_options]} -t #{temp.path}`
-    system "git commit #{@options[:git_options]} -t #{temp.path}"
+    puts `git commit #{@options[:git_options]} -F #{temp.path}`
   end
 
   def get_config(git_repo)
