@@ -29,7 +29,7 @@ You can put your own mssage template file under $HOME as
 The format of the template file is ERB.
 
 The default template file is like:
-    "#<%= issue_id %>:<%= issue_subject %>\n"
+    " #<%= issue_id %>:<%= issue_subject %> "
 
 == Copyright
 
