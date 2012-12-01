@@ -21,6 +21,16 @@ Specify the api key and url. You only need to do it once for each repo.
 Example:
 	git-redmine-commit 3125 -- -a
 
+=== Message Template
+
+You can put your own mssage template file under $HOME as
+    $HOME/.redmine_commit_template
+
+The format of the template file is ERB.
+
+The default template file is like:
+    "#<%= issue_id %>:<%= issue_subject %>\n"
+
 == Copyright
 
 (The MIT License)
