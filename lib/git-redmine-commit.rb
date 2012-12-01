@@ -10,10 +10,13 @@ require 'ostruct'
 
 require 'rubygems'
 require 'xmlsimple'
+require 'erb'
 
 class GitRedmineCommit  
   defaults = {}
   REDMINECOMMIT_RC = File.join("#{ENV['HOME']}",".redmine_commit_rc")
+  REDMINECOMMIT_TEMPLATE = File.join("#{ENV['HOME']}",".redmine_commit_template")
+  
   GRC_CONFIG = if File.exist?(REDMINECOMMIT_RC)
             defaults.merge(YAML.load_file(REDMINECOMMIT_RC))
           else
@@ -73,6 +76,15 @@ class GitRedmineCommit
     end    
   end
   
+  def message_template
+    template_src = if File.file?(REDMINECOMMIT_TEMPLATE)
+      open(REDMINECOMMIT_TEMPLATE) {|f| f.read}
+    else
+      "#<%= issue_id %>:<%= issue_subject %>\n"
+    end
+    ERB.new template_src
+  end
+  
   def run
     git_repo = @options[:repo]
     unless @options[:key] && @options[:url]
@@ -84,11 +96,18 @@ class GitRedmineCommit
     
     url = File.join(@options[:url], "issues", "#{@options[:issue_id]}.xml?key=#{@options[:key]}")
     issue = XmlSimple.xml_in(open(url).read)
-    title = "fix issue ##{issue['id']} : #{issue['subject']}" 
+    issue_id = issue['id']
+    issue_subject = issue['subject']
+    title = message_template.result(binding)
     temp = Tempfile.new('redmine_commit')
     temp << title
     temp.close
-    puts `git commit #{@options[:git_options]} -F #{temp.path}`
+    
+    commit_template = `git config --get commit.template`
+    `git config commit.template #{temp.path}`    
+    system "git commit #{@options[:git_options]}"
+    system "git config --unset commit.template"
+    `git config commit.template #{commit_template}` if commit_template && commit_template.size > 0
   end
 
   def get_config(git_repo)
