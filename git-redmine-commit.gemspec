@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{git-redmine-commit}
-  s.version = "0.7.0"
+  s.version = "0.8.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Robin Lu"]
-  s.date = %q{2011-05-26}
+  s.date = %q{2012-12-01}
   s.default_executable = %q{git-redmine-commit}
   s.description = %q{With this tool, you can do a git commit with a redmine issue id. The message of the commit is filled with the title of the issue automatically.}
   s.email = %q{iamawalrus@gmail.com}
@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/robin/git-redmine-commit}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
+  s.rubygems_version = %q{1.4.2}
   s.summary = %q{git commit with redmine issue id}
   s.test_files = [
     "test/helper.rb",
@@ -43,7 +43,6 @@ Gem::Specification.new do |s|
   ]
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
