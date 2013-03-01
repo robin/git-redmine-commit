@@ -19,7 +19,7 @@ Specify the api key and url. You only need to do it once for each repo.
     -h, --help                       Displays this help info
 
 Example:
-    git-redmine-commit 3125 -- -a
+    git-redmine-commit 3125 -s -- -a
 
 === Message Template
 
