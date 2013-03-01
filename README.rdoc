@@ -17,6 +17,7 @@ Specify the api key and url. You only need to do it once for each repo.
         --redmine-url [url]          URL of your redmine.
 
     -h, --help                       Displays this help info
+    -s, --silent                     commit with default message silently without prompting the message editor
 
 Example:
     git-redmine-commit 3125 -s -- -a
