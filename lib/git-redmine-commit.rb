@@ -44,10 +44,13 @@ class GitRedmineCommit
         puts opts
         exit 0
       end
-
+      opts.separator ""
+      opts.on("-s", "--silent", "commit with default message silently without prompting the message editor") do
+        @options[:silent] = true
+      end
       opts.separator ""
       opts.separator "Example:"
-      opts.separator "\t#{File.basename($0)} 3125 -- -a"
+      opts.separator "\t#{File.basename($0)} 3125 -s -- -a"
     end
     
     opts.parse!(args)
@@ -80,7 +83,7 @@ class GitRedmineCommit
     template_src = if File.file?(REDMINECOMMIT_TEMPLATE)
       open(REDMINECOMMIT_TEMPLATE) {|f| f.read}
     else
-      " #<%= issue_id %>:<%= issue_subject %>\n"
+      " Fix #<%= issue_id %>:<%= issue_subject %>\n"
     end
     ERB.new template_src
   end
@@ -102,12 +105,16 @@ class GitRedmineCommit
     temp = Tempfile.new('redmine_commit')
     temp << title
     temp.close
-    
-    commit_template = `git config --get commit.template`
-    `git config commit.template #{temp.path}`    
-    system "git commit #{@options[:git_options]}"
-    system "git config --unset commit.template"
-    `git config commit.template #{commit_template}` if commit_template && commit_template.size > 0
+
+    if @options[:silent]
+      puts `git commit #{@options[:git_options]} -F #{temp.path}`
+    else
+      commit_template = `git config --get commit.template`
+      `git config commit.template #{temp.path}`    
+      system "git commit #{@options[:git_options]}"
+      system "git config --unset commit.template"
+      `git config commit.template #{commit_template}` if commit_template && commit_template.size > 0
+    end
   end
 
   def get_config(git_repo)
