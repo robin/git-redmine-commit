@@ -27,6 +27,9 @@ Example:
     [alias]
         rc = "!sh -c 'git-redmine-commit $1 -s -- -a' -"
 
+Then, the exmaple becomes:
+    git rc 3125
+
 === Message Template
 
 You can put your own mssage template file under $HOME as
