@@ -83,7 +83,7 @@ class GitRedmineCommit
     template_src = if File.file?(REDMINECOMMIT_TEMPLATE)
       open(REDMINECOMMIT_TEMPLATE) {|f| f.read}
     else
-      "Fix #<%= issue_id %> : <%= issue_subject %>\n"
+      " Fix #<%= issue_id %>:<%= issue_subject %>\n<%= project_name %> - <%= assigned_to %>\n"
     end
     ERB.new template_src
   end
@@ -101,6 +101,8 @@ class GitRedmineCommit
     issue = XmlSimple.xml_in(open(url).read)
     issue_id = issue['id'].first
     issue_subject = issue['subject'].first
+    project_name = issue['project'].first['name']
+    assigned_to = issue['assigned_to'].first['name']
     title = message_template.result(binding)
     temp = Tempfile.new('redmine_commit')
     temp << title
