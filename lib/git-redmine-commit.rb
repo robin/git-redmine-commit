@@ -83,7 +83,7 @@ class GitRedmineCommit
     template_src = if File.file?(REDMINECOMMIT_TEMPLATE)
       open(REDMINECOMMIT_TEMPLATE) {|f| f.read}
     else
-      " Fix #<%= issue_id %>:<%= issue_subject %>\n<%= project_name %> - <%= assigned_to %>\n"
+      "Fix #<%= issue_id %>:<%= issue_subject %>\n<%= project_name %> - <%= assigned_to %>\nWrite something pls...\n"
     end
     ERB.new template_src
   end
